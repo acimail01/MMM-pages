@@ -20,7 +20,6 @@ Module.register('MMM-pages', {
 		return ['pages.css'];
 	},
 
-
 	/**
 	* Modulo that also works with negative numbers.
 	*
@@ -35,13 +34,13 @@ Module.register('MMM-pages', {
 	* Pseudo-constructor for our module. Makes sure that values aren't negative,
 	* and sets the default current page to 0.
 	*/
-  start: function() {
-    this.curPage = 0;
+	start: function() {
+		this.curPage = 0;
 
-    // Disable rotation if an invalid input is given
-    this.rotationTime = Math.max(this.config.rotationTime, 0);
-    this.rotationDelay = Math.max(this.config.rotationDelay, 0);
-  },
+		// Disable rotation if an invalid input is given
+		this.rotationTime = Math.max(this.config.rotationTime, 0);
+		this.rotationDelay = Math.max(this.config.rotationDelay, 0);
+	},
 
 	/**
 	* Handles incoming notifications. Responds to the following:
@@ -220,18 +219,12 @@ Module.register('MMM-pages', {
 		var currentPage = this.curPage;
 		var maxPages = this.config.modules.length ;
 		
+		steps = (gotoPage - currentPage);
+		
 		if (Math.abs(gotoPage - currentPage) > Math.round(maxPages / 2)) {
 			steps = (maxPages - currentPage + gotoPage)
-		} else {
-			steps = (gotoPage - currentPage);
 		}
 		steps = steps % maxPages;
-		
-		Log.warn("## currentPage="+currentPage+", gotoPage="+gotoPage+", steps="+steps+", maxPages="+maxPages+"#######");
-		
 		return steps;
   },
-
-
-
 });
